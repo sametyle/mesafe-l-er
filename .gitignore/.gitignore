@@ -1,0 +1,27 @@
+#include <LiquidCrystal.h>
+LiquidCrystal lcd(12,11,5,4,9,8);
+const int trig =2;
+const int echo= 3;
+
+int sure=0;
+int mesafe=0;
+
+void setup() {
+pinMode(trig, OUTPUT);
+pinMode(echo, INPUT);
+Serial.begin(9600);
+lcd.begin(16,2);
+}
+
+void loop() {
+  lcd.clear();
+digitalWrite(trig, HIGH);
+delayMicroseconds(1000);
+digitalWrite(trig, LOW);
+sure = pulseIn(echo, HIGH);
+mesafe = (sure/2) / 29.1;
+lcd.print("MESAFE : ");
+lcd.print(mesafe);
+lcd.print("cm");
+delay(250);
+}
